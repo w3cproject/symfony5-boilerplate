@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('auth') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('auth') }}
+{% endblock %}
+
+{% block body %}
+    {# <form method="post" class="form-signin">
+        <div class="form-label-group">
+            <input type="email" value="{{ last_username }}" placeholder="Email address" name="email" id="inputEmail"
+                   class="form-control" required autofocus>
+            <label for="inputEmail">Email address</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <label for="inputPassword">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017 -
+            <script>document.write(new Date().getFullYear().toString())</script>
+        </p>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+    </form>
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Register</h1> #}
+
+    {{ form_start(registrationForm, {'attr': {'class': 'form-signin'}}) }}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('logoutPage') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class="text-center mb-4">
+        <a href="{{ path('mainPage') }}">
+            <i class="fab fa-bootstrap display-1"></i>
+        </a>
+        <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a
+                    href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, Firefox, and IE 10/11 (prefixed).</a>
+        </p>
+    </div>
+
+    <div class="form-label-group">
+        {{ form_widget(registrationForm.email, {'attr': {
+            'class': 'form-control',
+            'placeholder': 'Email address',
+            'autofocus': true
+        }}) }}
+        {{ form_label(registrationForm.email) }}
+    </div>
+
+    <div class="form-label-group">
+        {{ form_widget(registrationForm.plainPassword, {'attr': {
+            'class': 'form-control',
+            'placeholder': 'Password',
+        }}) }}
+        {{ form_label(registrationForm.plainPassword) }}
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            {{ form_widget(registrationForm.agreeTerms) }} Agree with Terms
+        </label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <p class="mt-4 text-center">
+        Already have account? <a href="{{ path('loginPage') }}">Sign In</a>
+    </p>
+    {{ form_end(registrationForm) }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6 m-auto">
+                <h1>{% trans %}brandName{% endtrans %}! <i class="fa fa-check text-success"></i></h1>
+
+                <p>Auth Pages:</p>
+                <ul>
+                    <li><code><a href="{{ path('loginPage') }}">Sign In</a></code></li>
+                    <li><code><a href="{{ path('registerPage') }}">Sign Up</a></code></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6 m-auto">
+                {% if app.request.locale == 'ru' %}
+                    <a href="{{ path('mainPage', {'_locale': 'en'}) }}">Перевести на Английский</a>
+                {% else %}
+                    <a href="{{ path('mainPage', {'_locale': 'ru'}) }}">Translate to Russian.</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6 m-auto">
+                <span class="h4">
+                    {% if app.user %}
+                        You are logged in as {{ app.user.email }}
+                    {% else %}
+                        You are not authorized, please <a href="{{ path('loginPage') }}">Sign In</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
